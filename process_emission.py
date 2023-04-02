@@ -26,7 +26,7 @@ def lambda_handler(event, context):
     #TODO3: Return the result
     client.publish(
         # publish on a vehicle specific topic
-        topic=f"{veh_id}/emissions",
+        topic=f"emissions/{veh_id}",
         payload=json.dumps(
             f"vehicle_CO2: {str(max_co2["veh_id"])}"
         ),
