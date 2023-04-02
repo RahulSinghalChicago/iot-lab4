@@ -27,7 +27,9 @@ class MQTTClient:
         self.state = 0
         self.client = AWSIoTMQTTClient(self.device_id)
         #TODO 2: modify your broker address
-        self.client.configureEndpoint("a20x3bs4tew3q9-ats.iot.us-east-1.amazonaws.com", 8883)
+        self.client.configureEndpoint("greengrass-ats.iot.us-east-1.amazonaws.com", 8883)
+#        self.client.configureEndpoint("a20x3bs4tew3q9-ats.iot.us-east-1.amazonaws.com", 8883)
+        #self.client.configureEndpoint("44.202.2.111", 8883)
         self.client.configureCredentials("./AmazonRootCA1.pem", key, cert)
         self.client.configureOfflinePublishQueueing(-1)  # Infinite offline Publish queueing
         self.client.configureDrainingFrequency(2)  # Draining: 2 Hz
@@ -55,7 +57,7 @@ class MQTTClient:
 
     def publish(self, Payload="payload"):
         #TODO4: fill in this function for your publish
-        self.client.subscribeAsync("myTopic", 0, ackCallback=self.customSubackCallback)
+        #self.client.subscribeAsync("myTopic", 0, ackCallback=self.customSubackCallback)
         
         self.client.publishAsync("myTopic", Payload, 0, ackCallback=self.customPubackCallback)
 

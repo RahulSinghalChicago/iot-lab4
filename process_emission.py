@@ -16,19 +16,22 @@ client = greengrasssdk.client("iot-data")
 max_co2 = defaultdict(float)
 def lambda_handler(event, context):
     global max_co2
+    print(event)
+    payload = event["payload"]
     #TODO1: Get your data
-    cur_co2 = float(event["vehicle_CO2"])
-    veh_id = event["vehicle_id"]
+    cur_co2 = float(payload["vehicle_CO2"])
+    veh_id = payload["vehicle_id"]
 
     #TODO2: Calculate max CO2 emission
     max_co2[veh_id] = max(cur_co2, max_co2[veh_id])
         
     #TODO3: Return the result
+    val = str(max_co2["veh_id"])
     client.publish(
         # publish on a vehicle specific topic
         topic=f"emissions/{veh_id}",
         payload=json.dumps(
-            f"vehicle_CO2: {str(max_co2["veh_id"])}"
+            f"vehicle_CO2: {val}"
         ),
     )
 
