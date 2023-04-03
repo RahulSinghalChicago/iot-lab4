@@ -185,7 +185,8 @@ if args.mode == 'both' or args.mode == 'publish':
     print("Loading vehicle data into cycle iter...")
     path = data_path.format(args.message)
     print(f"TRYING: {path} WITH vehicle numer `{args.message}`")
-    data = cycle(pd.read_csv(data_path.format(args.message)).iterrows())
+    df = pd.read_csv(data_path.format(args.message))
+    data = cycle(df.iterrows())
 
 #def on_message(message):
 #    print(f"PROCESS EMISSIONS RECEIVED: {message.payload}")
@@ -195,7 +196,7 @@ if args.mode == 'both' or args.mode == 'publish':
 #    #myAWSIoTMQTTClient.subscribe(sub_topic, 0, None)
 #    myAWSIoTMQTTClient.subscribe(sub_topic, 0, on_message)
 
-
+max_iter = len(df)
 loopCount = 0
 while True:
     if args.mode == 'both' or args.mode == 'publish':
@@ -206,4 +207,5 @@ while True:
         if args.mode == 'publish':
             print('Published topic %s: %s\n' % (topic, messageJson))
         loopCount += 1
-    time.sleep(1)
+    if loopCount == max_iter: break
+    time.sleep(0.1)
