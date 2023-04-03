@@ -14,7 +14,7 @@
 # */
 
 
-# python3 basicDiscovery.py -e a20x3bs4tew3q9-ats.iot.us-east-1.amazonaws.com -r AmazonRootCA1.pem -c ./certificates/device_0/device_0.certificate.pem -k ./certificates/device_0/device_0.private.pem --thingName device_0 --topic 'emissions/vehicle0' --mode publish --message 'Hello, World! Sent from HelloWorld_Publisher'
+# python3 basicDiscovery.py -e a20x3bs4tew3q9-ats.iot.us-east-1.amazonaws.com -r AmazonRootCA1.pem -c ./certificates/device_1/device_1.certificate.pem -k ./certificates/device_1/device_1.private.pem --thingName device_1 --topic 'myTopic' --mode publish --message 'Hello, World! Sent from HelloWorld_Publisher'
 
 import os
 import sys
